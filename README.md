@@ -7,4 +7,4 @@ Recent advances in Deep Reinforcement Learning (DRL) have shown a significant im
  
 ## Description
 
-To know more details about the implementation used in the experiments contact: [almasan@ac.upc.edu](mailto:almasan@ac.upc.edu?subject=[GitHub]%20Source%20code%20DRL+GNN)
+To know more details about the implementation used in the experiments contact: [almasan@ac.upc.edu](mailto:almasan@ac.upc.edu)
