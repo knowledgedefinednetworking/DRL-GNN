@@ -7,4 +7,15 @@ Recent advances in Deep Reinforcement Learning (DRL) have shown a significant im
  
 ## Description
 
-To know more details about the implementation used in the experiments contact: [almasan@ac.upc.edu](mailto:almasan@ac.upc.edu)
+To know more details about the implementation used in the experiments contact: [felician.paul.almasan@upc.edu](mailto:felician.paul.almasan@upc.edu)
+
+Please cite the corresponding article if you utilize the code in this repository:
+
+```
+@article{almasan2019deep,
+  title={Deep reinforcement learning meets graph neural networks: Exploring a routing optimization use case},
+  author={Almasan, Paul and Su{\'a}rez-Varela, Jos{\'e} and Badia-Sampera, Arnau and Rusek, Krzysztof and Barlet-Ros, Pere and Cabellos-Aparicio, Albert},
+  journal={arXiv preprint arXiv:1910.07421},
+  year={2019}
+}
+```
