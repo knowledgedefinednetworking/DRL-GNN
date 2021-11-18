@@ -9,7 +9,7 @@ Recent advances in Deep Reinforcement Learning (DRL) have shown a significant im
 
 To know more details about the implementation used in the experiments contact: [felician.paul.almasan@upc.edu](mailto:felician.paul.almasan@upc.edu)
 
-Please cite the corresponding article if you utilize the code in this repository:
+Please cite the corresponding article if you use the code from this repository:
 
 ```
 @article{almasan2019deep,
