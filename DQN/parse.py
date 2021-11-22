@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.signal import savgol_filter
 
 if __name__ == "__main__":
-    # python parse.py -d ./Logs/expDQN_agentLogs.txt
+    # python parse.py -d ./Logs/expsample_DQN_agentLogs.txt
     parser = argparse.ArgumentParser(description='Parse file and create plots')
 
     parser.add_argument('-d', help='data file', type=str, required=True, nargs='+')
