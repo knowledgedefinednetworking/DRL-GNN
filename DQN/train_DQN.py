@@ -356,6 +356,7 @@ class DQNAgent:
                         tf.convert_to_tensor(tensors['num_edges']))) # 12
 
 if __name__ == "__main__":
+    # python train_DQN.py
     # Get the environment and extract the number of actions.
     env_training = gym.make(ENV_NAME)
     np.random.seed(SEED)
