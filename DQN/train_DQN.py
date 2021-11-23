@@ -27,7 +27,7 @@ TRAINING_EPISODES = 20
 EVALUATION_EPISODES = 40
 FIRST_WORK_TRAIN_EPISODE = 60
 
-MULTI_FACTOR_BATCH = 5 # Number of batches used in training
+MULTI_FACTOR_BATCH = 6 # Number of batches used in training
 TAU = 0.08 # Only used in soft weights copy
 
 differentiation_str = "sample_DQN_agent"
@@ -475,7 +475,7 @@ if __name__ == "__main__":
 
             # Store trained model
             checkpoint.save(checkpoint_prefix)
-            fileLogs.write("MAX REWD: " + str(max_reward) + " REWD_ID: " + str(reward_id) +",\n")
+            fileLogs.write("MAX REWD: " + str(max_reward) + " MODEL_ID: " + str(reward_id) +",\n")
             counter_store_model = counter_store_model + 1
 
         fileLogs.flush()
@@ -509,7 +509,7 @@ if __name__ == "__main__":
 
     # Store trained model
     checkpoint.save(checkpoint_prefix)
-    fileLogs.write("MAX REWD: " + str(max_reward) + " REWD_ID: " + str(reward_id) +",\n")
+    fileLogs.write("MAX REWD: " + str(max_reward) + " MODEL_ID: " + str(reward_id) +",\n")
     
     fileLogs.flush()
     fileLogs.close()
