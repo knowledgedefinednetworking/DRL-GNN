@@ -25,3 +25,8 @@ python train_DQN.py
 ```ruby
 python parse.py -d ./Logs/expsample_DQN_agentLogs.txt
 ```
+
+6. Finally, we can evaluate our trained model on different topologies executing the command below. Notice that in the *evaluate_DQN.py* script you must modify the hyperparameters of the model to match the ones from the trained model.
+```ruby
+python evaluate_DQN.py -d ./Logs/expsample_DQN_agentLogs.txt
+```
