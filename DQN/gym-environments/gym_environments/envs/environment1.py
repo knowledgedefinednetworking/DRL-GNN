@@ -23,37 +23,23 @@ def create_geant2_graph():
          (9, 10), (9, 13), (9, 12), (10, 13), (11, 20), (11, 14), (12, 13), (12,19), (12,21),
          (14, 15), (15, 16), (16, 17), (17,18), (18,21), (19, 23), (21,22), (22, 23)])
 
-    # nx.draw(Gbase, with_labels=True)
-    # plt.show()
-    # plt.clf()
-
     return Gbase
 
 def create_nsfnet_graph():
-
     Gbase = nx.Graph()
     Gbase.add_nodes_from([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
     Gbase.add_edges_from(
         [(0, 1), (0, 2), (0, 3), (1, 2), (1, 7), (2, 5), (3, 8), (3, 4), (4, 5), (4, 6), (5, 12), (5, 13),
          (6, 7), (7, 10), (8, 9), (8, 11), (9, 10), (9, 12), (10, 11), (10, 13), (11, 12)])
 
-    # nx.draw(Gbase, with_labels=True)
-    # plt.show()
-    # plt.clf()
-
     return Gbase
 
 def create_small_top():
-
     Gbase = nx.Graph()
     Gbase.add_nodes_from([0, 1, 2, 3, 4, 5, 6, 7, 8])
     Gbase.add_edges_from(
         [(0, 1), (0, 2), (0, 3), (1, 2), (1, 7), (2, 5), (3, 8), (3, 4), (4, 5), (4, 6), (5, 0),
          (6, 7), (6, 8), (7, 8), (8, 0), (8, 6), (3, 2), (5, 3)])
-
-    # nx.draw(Gbase, with_labels=True)
-    # plt.show()
-    # plt.clf()
 
     return Gbase
 
@@ -65,22 +51,12 @@ def create_gbn_graph():
          (5, 6), (5, 8), (6, 7), (7, 8), (7, 10), (9, 10), (9, 12), (10, 11), (10, 12), (11, 13),
          (12, 14), (12, 16), (13, 14), (14, 15), (15, 16)])
 
-    # nx.draw(Gbase, with_labels=True)
-    # plt.show()
-    # plt.clf()
-
     return Gbase
 
 def generate_nx_graph(topology):
-    """Generate graphs for training with the same topology but different weights.
-
-  Args:
-    rand: A random seed (np.RandomState instance).
-
-  Returns:
-    graphs: The list of input graphs.
-    targets: The list of output targets (i.e. sum of edges).
-  """
+    """
+    Generate graphs for training with the same topology.
+    """
     if topology == 0:
         G = create_nsfnet_graph()
     elif topology == 1:
@@ -90,6 +66,11 @@ def generate_nx_graph(topology):
     else:
         G = create_gbn_graph()
 
+    # nx.draw(G, with_labels=True)
+    # plt.show()
+    # plt.clf()
+
+    # Node id counter
     incId = 1
     # Put all distance weights into edge attributes.
     for i, j in G.edges():
@@ -323,3 +304,14 @@ class Env1(gym.Env):
                 break
 
         return self.graph_state, self.demand, self.source, self.destination
+    
+    def eval_sap_reset(self, demand, source, destination):
+        """
+        Reset environment and setup for new episode. This function is used in the "evaluate_DQN.py" script.
+        """
+        self.graph_state = np.copy(self.initial_state)
+        self.demand = demand
+        self.source = source
+        self.destination = destination
+
+        return self.graph_state
