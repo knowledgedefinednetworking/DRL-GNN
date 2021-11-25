@@ -30,7 +30,6 @@ def create_geant2_graph():
     return Gbase
 
 def create_nsfnet_graph():
-
     Gbase = nx.Graph()
     Gbase.add_nodes_from([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
     Gbase.add_edges_from(
@@ -44,7 +43,6 @@ def create_nsfnet_graph():
     return Gbase
 
 def create_small_top():
-
     Gbase = nx.Graph()
     Gbase.add_nodes_from([0, 1, 2, 3, 4, 5, 6, 7, 8])
     Gbase.add_edges_from(
@@ -72,15 +70,9 @@ def create_gbn_graph():
     return Gbase
 
 def generate_nx_graph(topology):
-    """Generate graphs for training with the same topology but different weights.
-
-  Args:
-    rand: A random seed (np.RandomState instance).
-
-  Returns:
-    graphs: The list of input graphs.
-    targets: The list of output targets (i.e. sum of edges).
-  """
+    """
+    Generate graphs for training with the same topology.
+    """
     if topology == 0:
         G = create_nsfnet_graph()
     elif topology == 1:
