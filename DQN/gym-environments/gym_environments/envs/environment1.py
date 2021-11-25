@@ -23,10 +23,6 @@ def create_geant2_graph():
          (9, 10), (9, 13), (9, 12), (10, 13), (11, 20), (11, 14), (12, 13), (12,19), (12,21),
          (14, 15), (15, 16), (16, 17), (17,18), (18,21), (19, 23), (21,22), (22, 23)])
 
-    # nx.draw(Gbase, with_labels=True)
-    # plt.show()
-    # plt.clf()
-
     return Gbase
 
 def create_nsfnet_graph():
@@ -35,10 +31,6 @@ def create_nsfnet_graph():
     Gbase.add_edges_from(
         [(0, 1), (0, 2), (0, 3), (1, 2), (1, 7), (2, 5), (3, 8), (3, 4), (4, 5), (4, 6), (5, 12), (5, 13),
          (6, 7), (7, 10), (8, 9), (8, 11), (9, 10), (9, 12), (10, 11), (10, 13), (11, 12)])
-
-    # nx.draw(Gbase, with_labels=True)
-    # plt.show()
-    # plt.clf()
 
     return Gbase
 
@@ -49,10 +41,6 @@ def create_small_top():
         [(0, 1), (0, 2), (0, 3), (1, 2), (1, 7), (2, 5), (3, 8), (3, 4), (4, 5), (4, 6), (5, 0),
          (6, 7), (6, 8), (7, 8), (8, 0), (8, 6), (3, 2), (5, 3)])
 
-    # nx.draw(Gbase, with_labels=True)
-    # plt.show()
-    # plt.clf()
-
     return Gbase
 
 def create_gbn_graph():
@@ -62,10 +50,6 @@ def create_gbn_graph():
         [(0, 2), (0, 8), (1, 2), (1, 3), (1, 4), (2, 4), (3, 4), (3, 9), (4, 8), (4, 10), (4, 9),
          (5, 6), (5, 8), (6, 7), (7, 8), (7, 10), (9, 10), (9, 12), (10, 11), (10, 12), (11, 13),
          (12, 14), (12, 16), (13, 14), (14, 15), (15, 16)])
-
-    # nx.draw(Gbase, with_labels=True)
-    # plt.show()
-    # plt.clf()
 
     return Gbase
 
@@ -82,6 +66,11 @@ def generate_nx_graph(topology):
     else:
         G = create_gbn_graph()
 
+    # nx.draw(G, with_labels=True)
+    # plt.show()
+    # plt.clf()
+
+    # Node id counter
     incId = 1
     # Put all distance weights into edge attributes.
     for i, j in G.edges():
