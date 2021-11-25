@@ -588,5 +588,5 @@ if __name__ == "__main__":
             ncol=4, fancybox=True, shadow=True)
     
     plt.savefig("./Images/ModelEval"+topo+".pdf", bbox_extra_artists=(lgd,), bbox_inches='tight')
-    plt.show()
+    #plt.show()
 
