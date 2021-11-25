@@ -304,3 +304,14 @@ class Env1(gym.Env):
                 break
 
         return self.graph_state, self.demand, self.source, self.destination
+    
+    def eval_sap_reset(self, demand, source, destination):
+        """
+        Reset environment and setup for new episode. This function is used in the "evaluate_DQN.py" script.
+        """
+        self.graph_state = np.copy(self.initial_state)
+        self.demand = demand
+        self.source = source
+        self.destination = destination
+
+        return self.graph_state
