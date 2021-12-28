@@ -250,10 +250,10 @@ class DQNAgent:
                         tensors['second'], tensors['num_edges'], training=False).numpy()
 
         if takeMax_epsilon:
-            # If we computed the K=4 q-values, we take the max
+            # We take the path with highest q-value
             action = np.argmax(self.listQValues)
         else:
-            action = 0
+            return path, list_k_features[0]
 
         return action, list_k_features[action]
     
