@@ -15,7 +15,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 ENV_NAME_AGENT = 'GraphEnv-v1'
 ENV_NAME = 'GraphEnv-v1'
 
-SEED = 7
+SEED = 9
 os.environ['PYTHONHASHSEED']=str(SEED)
 np.random.seed(SEED)
 tf.random.set_seed(1)
@@ -26,7 +26,7 @@ tf.random.set_seed(1)
 # tf.config.threading.set_inter_op_parallelism_threads(1)
 # tf.config.threading.set_intra_op_parallelism_threads(1)
 
-NUMBER_EPISODES = 40
+NUMBER_EPISODES = 50
 # We assume that the number of samples is always larger than the number of demands any agent can ever allocate
 NUM_SAMPLES_EPSD = 100
 
