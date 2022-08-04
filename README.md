@@ -2,6 +2,8 @@
 #### Link to paper: [[here](https://arxiv.org/abs/1910.07421)]
 #### P. Almasan, J. Suárez-Varela, A. Badia-Sampera, K. Rusek, P. Barlet-Ros, A. Cabellos-Aparicio.
  
+Contact: <felician.paul.almasan@upc.edu>
+
 [![Twitter Follow](https://img.shields.io/twitter/follow/PaulAlmasan?style=social)](https://twitter.com/PaulAlmasan)
 [![GitHub watchers](https://img.shields.io/github/watchers/knowledgedefinednetworking/DRL-GNN?style=social&label=Watch)](https://github.com/knowledgedefinednetworking/DRL-GNN)
 [![GitHub forks](https://img.shields.io/github/forks/knowledgedefinednetworking/DRL-GNN?style=social&label=Fork)](https://github.com/knowledgedefinednetworking/DRL-GNN)
