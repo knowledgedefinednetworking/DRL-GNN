@@ -46,6 +46,8 @@ hparams = {
 }
 
 class SAPAgent:
+    # Shortest Available Path
+    # Select the shortest available path among the K paths
     def __init__(self):
         self.K = 4
 
@@ -77,7 +79,9 @@ class SAPAgent:
         if allocated==0:
             return 0
 
-class RANDAgent:
+class LBAgent:
+    # Load Balancing agent
+    # Selects the path among the K paths with uniform probability
     def __init__(self):
         self.K = 4
 
@@ -298,13 +302,13 @@ class DQNAgent:
 
         return inputs
 
-def exec_rand_model_episodes(experience_memory, graph_topology):
-    env_rand = gym.make(ENV_NAME)
-    env_rand.seed(SEED)
-    env_rand.generate_environment(graph_topology, listofDemands)
+def exec_lb_model_episodes(experience_memory, graph_topology):
+    env_lb = gym.make(ENV_NAME)
+    env_lb.seed(SEED)
+    env_lb.generate_environment(graph_topology, listofDemands)
 
-    agent = RANDAgent()
-    rewards_rand = np.zeros(NUMBER_EPISODES)
+    agent = LBAgent()
+    rewards_lb = np.zeros(NUMBER_EPISODES)
 
     rewardAdd = 0
     reward_it = 0
@@ -318,40 +322,40 @@ def exec_rand_model_episodes(experience_memory, graph_topology):
             demand = experience_memory[iter_episode][1]
             source = experience_memory[iter_episode][2]
             destination = experience_memory[iter_episode][3]
-            state = env_rand.eval_sap_reset(demand, source, destination)
+            state = env_lb.eval_sap_reset(demand, source, destination)
 
-            action = agent.act(env_rand, state, demand, source, destination)
-            new_state, reward, done, _, _, _ = env_rand.make_step(state, action, demand, source, destination)
-            env_rand.demand = demand
-            env_rand.source = source
-            env_rand.destination = destination
+            action = agent.act(env_lb, state, demand, source, destination)
+            new_state, reward, done, _, _, _ = env_lb.make_step(state, action, demand, source, destination)
+            env_lb.demand = demand
+            env_lb.source = source
+            env_lb.destination = destination
             rewardAdd = rewardAdd + reward
             state = new_state
 
             if done:
-                rewards_rand[reward_it] = rewardAdd
+                rewards_lb[reward_it] = rewardAdd
                 reward_it = reward_it + 1
                 wait_for_new_episode = True
 
             iter_episode = iter_episode + 1
         else:
             if experience_memory[iter_episode][0] != new_episode_it:
-                print("RAND ERROR! The experience replay buffer needs more samples/episode")
+                print("LB ERROR! The experience replay buffer needs more samples/episode")
                 os.kill(os.getpid(), 9)
 
             demand = experience_memory[iter_episode][1]
             source = experience_memory[iter_episode][2]
             destination = experience_memory[iter_episode][3]
-            action = agent.act(env_rand, state, demand, source, destination)
-            new_state, reward, done, _, _, _ = env_rand.make_step(state, action, demand, source, destination)
-            env_rand.demand = demand
-            env_rand.source = source
-            env_rand.destination = destination
+            action = agent.act(env_lb, state, demand, source, destination)
+            new_state, reward, done, _, _, _ = env_lb.make_step(state, action, demand, source, destination)
+            env_lb.demand = demand
+            env_lb.source = source
+            env_lb.destination = destination
             rewardAdd = rewardAdd + reward
             state = new_state
 
             if done:
-                rewards_rand[reward_it] = rewardAdd
+                rewards_lb[reward_it] = rewardAdd
                 reward_it = reward_it + 1
                 wait_for_new_episode = True
 
@@ -362,7 +366,7 @@ def exec_rand_model_episodes(experience_memory, graph_topology):
             new_episode = True
             new_episode_it = new_episode_it + 1
             iter_episode = new_episode_it*NUM_SAMPLES_EPSD
-    return rewards_rand
+    return rewards_lb
 
 def exec_sap_model_episodes(experience_memory, graph_topology):
     env_sap = gym.make(ENV_NAME)
@@ -533,7 +537,7 @@ if __name__ == "__main__":
 
     means_sap = np.zeros(NUMBER_EPISODES)
     means_dqn = np.zeros(NUMBER_EPISODES)
-    means_rand = np.zeros(NUMBER_EPISODES)
+    means_lb = np.zeros(NUMBER_EPISODES)
     iters = np.zeros(NUMBER_EPISODES)
 
     experience_memory = deque(maxlen=NUMBER_EPISODES*NUM_SAMPLES_EPSD)
@@ -555,17 +559,17 @@ if __name__ == "__main__":
 
     # store_experiences.close()
 
-    rewards_rand = exec_rand_model_episodes(experience_memory, graph_topology)
+    rewards_lb = exec_lb_model_episodes(experience_memory, graph_topology)
     rewards_sap = exec_sap_model_episodes(experience_memory, graph_topology)
     rewards_dqn = exec_dqn_model_episodes(experience_memory, env_dqn, dqn_agent)
 
-    #rewards_rand.tofile('rewards_rand'+topo+'1K.dat')
+    #rewards_lb.tofile('rewards_lb'+topo+'1K.dat')
     #rewards_dqn.tofile('rewards_dqn'+topo+'1K.dat')
 
     plt.rcParams.update({'font.size': 12})
     plt.plot(rewards_dqn, 'r', label="DQN")
     plt.plot(rewards_sap, 'b', label="SAP")
-    plt.plot(rewards_rand, 'g', label="RAND")
+    plt.plot(rewards_lb, 'g', label="LB")
 
     #DQN
     mean = np.mean(rewards_dqn) 
@@ -577,10 +581,10 @@ if __name__ == "__main__":
     means_sap.fill(mean)
     plt.plot(means_sap, 'b', linestyle=":")
 
-    #RAND
-    mean = np.mean(rewards_rand) 
-    means_rand.fill(mean)
-    plt.plot(means_rand, 'g', linestyle="--")
+    #LB
+    mean = np.mean(rewards_lb) 
+    means_lb.fill(mean)
+    plt.plot(means_lb, 'g', linestyle="--")
 
     plt.xlabel("Episodes", fontsize=14, fontweight='bold')
     plt.ylabel("Score", fontsize=14, fontweight='bold')
