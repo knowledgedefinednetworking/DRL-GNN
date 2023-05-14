@@ -10,7 +10,7 @@ import mpnn as gnn
 from collections import deque
 import tensorflow as tf
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+#os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 
 ENV_NAME_AGENT = 'GraphEnv-v1'
 ENV_NAME = 'GraphEnv-v1'
